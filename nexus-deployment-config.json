@@ -1,0 +1,56 @@
+{
+  "kind": "DeploymentConfig",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "openshift-nexus-deployment"
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "labels": {
+          "name": "openshift-nexus-deployment"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "openshift-nexus",
+            "image": "openshift-nexus",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "protocol": "TCP"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "replicas": 2,
+    "selector": {
+      "name": "openshift-nexus-deployment"
+    },
+    "triggers": [
+      {
+        "type": "ConfigChange"
+      },
+      {
+        "type": "ImageChange",
+        "imageChangeParams": {
+          "automatic": true,
+          "containerNames": [
+            "openshift-nexus"
+          ],
+          "from": {
+            "kind": "ImageStreamTag",
+            "name": "openshift-nexus:latest"
+          }
+        }
+      }
+    ],
+    "strategy": {
+      "type": "Rolling"
+    }
+  }
+}
+
