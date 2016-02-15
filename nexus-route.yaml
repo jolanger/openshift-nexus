@@ -8,7 +8,7 @@ metadata:
     template: openshift-nexus-deployment
   name: openshift-nexus
 spec:
-  host: nexus-devops.appa4.tsi-af.de
+  host: nexus-fresh.appa4.tsi-af.de
   tls:
     caCertificate: |-
       -----BEGIN CERTIFICATE-----

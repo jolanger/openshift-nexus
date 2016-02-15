@@ -1,4 +1,4 @@
-FROM       centos:centos7
+FROM       library/centos:7
 MAINTAINER Deutsche Telekom
 
 
