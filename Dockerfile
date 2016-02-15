@@ -6,7 +6,8 @@ MAINTAINER Deutsche Telekom
 ENV SONATYPE_WORK /sonatype-work
 ENV NEXUS_VERSION 2.11.4-01
 ENV http_proxy 'http://172.22.236.11:3128'
-ENV https_proxy 'http://172.22.236.11:3128'
+ENV https_proxy 'http://172.22.236.11:3128'#
+ENV no_proxy '172.30.219.231,172.30.*.*'
 RUN  echo -e "[main]\nproxy=http://172.22.236.11:3128" >> /etc/yum/yum.conf
 
 
