@@ -25,7 +25,7 @@ RUN mkdir -p /opt/sonatype/nexus \
 #RUN useradd -r -u 200 -m -c "nexus role account" -d ${SONATYPE_WORK} -s /bin/false nexus
 
 #VOLUME ${SONATYPE_WORK}
-RUN mkdir -p ${SONATYPE_WORK} 
+RUN mkdir -p ${SONATYPE_WORK} && chmod 777 ${SONATYPE_WORK} 
 
 EXPOSE 8081
 WORKDIR /opt/sonatype/nexus
