@@ -22,15 +22,15 @@ RUN mkdir -p /opt/sonatype/nexus \
   && mv /tmp/nexus-${NEXUS_VERSION}/* /opt/sonatype/nexus/ \
   && rm -rf /tmp/nexus-${NEXUS_VERSION}
 
-RUN useradd -r -u 200 -m -c "nexus role account" -d ${SONATYPE_WORK} -s /bin/false nexus
+#RUN useradd -r -u 200 -m -c "nexus role account" -d ${SONATYPE_WORK} -s /bin/false nexus
 
 #VOLUME ${SONATYPE_WORK}
-RUN ls -ltra ${SONATYPE_WORK} 
+RUN mkdir -p ${SONATYPE_WORK} 
 
 EXPOSE 8081
 WORKDIR /opt/sonatype/nexus
-USER nexus
-CMD ls -ltra / && ls -ltran && whoami && id -u && ls -ltra ${SONATYPE_WORK} && java \
+#USER nexus
+CMD ls -ltra / && ls -ltran && id && ls -ltra ${SONATYPE_WORK} && java \
   -Dnexus-work=${SONATYPE_WORK} -Dnexus-webapp-context-path=${CONTEXT_PATH} \
   -Xms${MIN_HEAP} -Xmx${MAX_HEAP} \
   -cp 'conf/:lib/*' \
