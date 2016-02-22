@@ -3,24 +3,26 @@ MAINTAINER Deutsche Telekom
 
 
 #Set basic properties
-ENV SONATYPE_WORK /sonatype-work
-ENV NEXUS_VERSION 2.11.4-01
-ENV http_proxy 'http://172.22.236.11:3128'
-ENV https_proxy 'http://172.22.236.11:3128'#
-ENV no_proxy '172.30.219.231,172.30.*.*'
+ENV SONATYPE_WORK='/sonatype-work' NEXUS_VERSION='2.11.4-01'
+ENV http_proxy='http://172.22.236.11:3128' https_proxy='http://172.22.236.11:3128'
 RUN  echo -e "[main]\nproxy=http://172.22.236.11:3128" >> /etc/yum/yum.conf
 
 
 RUN yum install -y \
-  curl tar createrepo \
+  curl tar createrepo java-1.8.0-openjdk \
   && yum clean all
 
-RUN cd /var/tmp \
-  && curl --fail --silent --location --retry 3 -O \
-  --header "Cookie: oraclelicense=accept-securebackup-cookie; " \
-  http://download.oracle.com/otn-pub/java/jdk/7u76-b13/jdk-7u76-linux-x64.rpm \
-  && rpm -Ui jdk-7u76-linux-x64.rpm \
-  && rm -rf jdk-7u76-linux-x64.rpm
+#RUN cd /var/tmp \
+#  && curl --fail --silent --location --retry 3 -O \
+#  --header "Cookie: oraclelicense=accept-securebackup-cookie; " \
+#  http://download.oracle.com/otn-pub/java/jdk/7u76-b13/jdk-7u76-linux-x64.rpm \
+#  && rpm -Ui jdk-7u76-linux-x64.rpm \
+#  && rm -rf jdk-7u76-linux-x64.rpm
+
+
+RUN export
+RUN curl https://download.sonatype.com/nexus/oss/nexus-${NEXUS_VERSION}-bundle.tar.gz 
+
 
 RUN mkdir -p /opt/sonatype/nexus \
   && curl --fail --silent --location --retry 3 \
