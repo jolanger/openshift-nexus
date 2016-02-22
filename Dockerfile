@@ -30,7 +30,7 @@ RUN ls -ltra ${SONATYPE_WORK}
 EXPOSE 8081
 WORKDIR /opt/sonatype/nexus
 USER nexus
-CMD ls -ltra / && ls -ltra ${SONATYPE_WORK} &&  whoami && java \
+CMD ls -ltra / && ls -ltran && whoami && id -u && ls -ltra ${SONATYPE_WORK} && java \
   -Dnexus-work=${SONATYPE_WORK} -Dnexus-webapp-context-path=${CONTEXT_PATH} \
   -Xms${MIN_HEAP} -Xmx${MAX_HEAP} \
   -cp 'conf/:lib/*' \
