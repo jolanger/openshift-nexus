@@ -25,13 +25,12 @@ RUN mkdir -p /opt/sonatype/nexus \
 RUN useradd -r -u 200 -m -c "nexus role account" -d ${SONATYPE_WORK} -s /bin/false nexus
 
 #VOLUME ${SONATYPE_WORK}
-RUN chown nexus ${SONATYPE_WORK}
-
+RUN ls -ltra ${SONATYPE_WORK} 
 
 EXPOSE 8081
 WORKDIR /opt/sonatype/nexus
 USER nexus
-CMD java \
+CMD ls -ltra ${SONATYPE_WORK} && ls -ltra / && whoami && java \
   -Dnexus-work=${SONATYPE_WORK} -Dnexus-webapp-context-path=${CONTEXT_PATH} \
   -Xms${MIN_HEAP} -Xmx${MAX_HEAP} \
   -cp 'conf/:lib/*' \
